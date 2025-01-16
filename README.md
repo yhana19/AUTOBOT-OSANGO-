@@ -1,53 +1,68 @@
 
+# Site de Création de ChatBots
+
+Bienvenue sur le site de création de ChatBots ! Cette plateforme a été conçue pour vous permettre de créer facilement et rapidement vos propres ChatBots, personnalisés selon vos besoins.
+
+## Fonctionnalités
+
+- Création simple et rapide de ChatBots.
+- Intégration avec divers outils de déploiement comme **Vercel**, **Heroku**, **Netlify**, **Koyeb**, **Render**, et bien d'autres.
+- Interface intuitive et adaptée aux débutants comme aux experts.
+
+## Aperçu
+
+<img src="assets/img.jpg" width="100%">
 
 ---
 
-# Site de Création de ChatBots  
+## Déploiement
 
-Bienvenue sur le site de création de ChatBots ! Cette plateforme a été conçue pour vous permettre de créer facilement et rapidement vos propres ChatBots, personnalisés selon vos besoins.  
+Notre plateforme supporte une large gamme de services de déploiement. Voici quelques exemples :
 
-## Fonctionnalités  
-- Création simple et rapide de ChatBots.  
-- Intégration avec divers outils de déploiement comme **Vercel**, **Heroku**, **Netlify**, **Koyeb**, **Render**, et bien d'autres.  
-- Interface intuitive et adaptée aux débutants comme aux experts.  
+### Déploiement sur Vercel
 
-## Aperçu du Site  
-![Aperçu du site](https://via.placeholder.com/800x400?text=Capture+du+Site)  
+![Logo de Vercel](https://vectorseek.com/wp-content/uploads/2021/12/Vercel-Logo-Vector.jpg)
 
----
+### Déploiement sur Heroku
 
-## Déploiement  
-Notre plateforme supporte une large gamme de services de déploiement. Voici quelques exemples :  
+![Logo de Heroku](https://logowik.com/content/uploads/images/heroku5276.jpg)
 
-### Déploiement sur Vercel  
-![Déploiement sur Vercel](https://via.placeholder.com/400x200?text=Vercel+Deployment)  
+### Déploiement sur Netlify
 
-### Déploiement sur Heroku  
-![Déploiement sur Heroku](https://via.placeholder.com/400x200?text=Heroku+Deployment)  
+![Logo de Netlify](https://www.logo.wine/a/logo/Netlify/Netlify-Logo.wine.svg)
 
-### Déploiement sur Netlify  
-![Déploiement sur Netlify](https://via.placeholder.com/400x200?text=Netlify+Deployment)  
+### Déploiement sur Koyeb
+
+![Logo de Koyeb](https://pentagramventures.com/wp-content/uploads/2020/01/koyeb.png)
+
+### Déploiement sur Render
+
+![Logo de Render](https://render.com/images/logos/render-logo-color.svg)
 
 ---
 
-## À propos du créateur  
+## À propos du créateur
 
-Ce projet a été créé par **Metoushela Walker**, un développeur passionné par l'intelligence artificielle et la technologie.  
+Ce projet a été créé par **Metoushela Walker**, un développeur passionné par l'intelligence artificielle et la technologie.
 
-### Quelques informations sur Metoushela Walker :  
-- **Profession** : Développeur Full Stack et passionné d'IA.  
-- **Intérêt** : Créer des outils qui simplifient la vie des utilisateurs.  
-- **Contact** : [ de Metoushela Walker](https://www.facebook.com/MetoushelaWalker)  
+### Quelques informations sur Metoushela Walker :
 
----
-
-## Contribuer  
-Les contributions sont les bienvenues ! Si vous avez des idées ou des suggestions, n'hésitez pas à ouvrir une issue ou à soumettre une pull request.  
+- **Profession** : Développeur Full Stack et passionné d'IA.
+- **Intérêt** : Créer des outils qui simplifient la vie des utilisateurs.
+- **Contact** : [Facebook de Metoushela Walker](https://www.facebook.com/MetoushelaWalker)
 
 ---
 
-## Licence  
-Ce projet est sous licence [MIT](LICENSE).  
+## Contribuer
 
----  
+Les contributions sont les bienvenues ! Si vous avez des idées ou des suggestions, n'hésitez pas à ouvrir une issue ou à soumettre une pull request.
 
+---
+
+## Licence
+
+Ce projet est sous licence [MIT](LICENSE).
+
+---
+
+ 
