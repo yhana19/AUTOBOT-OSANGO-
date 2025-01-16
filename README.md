@@ -37,7 +37,7 @@ Ce projet a été créé par **Metoushela Walker**, un développeur passionné p
 ### Quelques informations sur Metoushela Walker :  
 - **Profession** : Développeur Full Stack et passionné d'IA.  
 - **Intérêt** : Créer des outils qui simplifient la vie des utilisateurs.  
-- **Contact** : [LinkedIn de Metoushela Walker](https://www.linkedin.com)  
+- **Contact** : [ de Metoushela Walker](https://www.facebook.com/MetoushelaWalker)  
 
 ---
 
@@ -51,4 +51,3 @@ Ce projet est sous licence [MIT](LICENSE).
 
 ---  
 
-Ce README contient des espaces réservés pour des images et des liens que vous pourrez remplacer par les vôtres. Si vous avez des précisions ou d'autres demandes, je suis à votre disposition !
