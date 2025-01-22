@@ -27,7 +27,7 @@ Notre plateforme supporte une large gamme de services de déploiement. Voici que
 
 ## À propos du créateur
 
-<img src="assets/metoushela.jpg" width="100%">
+<img src="assets/metou.jpg" width="100%">
 Ce projet a été créé par **Metoushela Walker**, un développeur passionné par l'intelligence artificielle et la technologie.
 
 ### Quelques informations sur Metoushela Walker :
