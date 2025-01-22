@@ -1,14 +1,12 @@
 const fs = require('fs');
 const path = require('path');
-const login = require('./metoushela/index');
+const login = require('./fb-chat-api/index');
 const express = require('express');
 const app = express();
 const chalk = require('chalk');
 const bodyParser = require('body-parser');
 const script = path.join(__dirname, 'script');
 const cron = require('node-cron');
-const db = admin.firestore();
-const admin = require("firebase-admin");
 const config = fs.existsSync('./data') && fs.existsSync('./data/config.json') ? JSON.parse(fs.readFileSync('./data/config.json', 'utf8')) : createConfig();
 const Utils = new Object({
   commands: new Map(),
@@ -16,12 +14,6 @@ const Utils = new Object({
   account: new Map(),
   cooldowns: new Map(),
 });
-// Initialiser Firebase Admin SDK
-admin.initializeApp({
-    credential: admin.credential.applicationDefault(), // Utiliser une clé générée ou variable d'environnement
-    projectId: "metoushela-3d094", // Remplacez par votre ID de projet Firebase
-});
-
 fs.readdirSync(script).forEach((file) => {
   const scripts = path.join(script, file);
   const stats = fs.statSync(scripts);
@@ -286,7 +278,7 @@ async function accountLogin(state, enableCommands = [], prefix, admin = []) {
           let hasPrefix = (event.body && aliases((event.body || '')?.trim().toLowerCase().split(/ +/).shift())?.hasPrefix == false) ? '' : prefix;
           let [command, ...args] = ((event.body || '').trim().toLowerCase().startsWith(hasPrefix?.toLowerCase()) ? (event.body || '').trim().substring(hasPrefix?.length).trim().split(/\s+/).map(arg => arg.trim()) : []);
           if (hasPrefix && aliases(command)?.hasPrefix === false) {
-            api.sendMessage(`Invalid usage this command doesn't need a prefix`, event.threadID, event.messageID);
+            api.sendMessage(`𝗠𝗘𝗚𝗔𝗡-𝗖𝗢𝗣𝗜𝗟𝗢𝗧 | 🧋✨ \n 𝗣𝗮𝘀 𝗯𝗲𝘀𝗼𝗶𝗻 𝗱𝗲 𝗽𝗿𝗲𝗳𝗶𝘅`, event.threadID, event.messageID);
             return;
           }
           if (event.body && aliases(command)?.name) {
@@ -294,7 +286,7 @@ async function accountLogin(state, enableCommands = [], prefix, admin = []) {
             const isAdmin = config?.[0]?.masterKey?.admin?.includes(event.senderID) || admin.includes(event.senderID);
             const isThreadAdmin = isAdmin || ((Array.isArray(adminIDS) ? adminIDS.find(admin => Object.keys(admin)[0] === event.threadID) : {})?.[event.threadID] || []).some(admin => admin.id === event.senderID);
             if ((role == 1 && !isAdmin) || (role == 2 && !isThreadAdmin) || (role == 3 && !config?.[0]?.masterKey?.admin?.includes(event.senderID))) {
-              api.sendMessage(`You don't have permission to use this command.`, event.threadID, event.messageID);
+              api.sendMessage(`𝗠𝗘𝗚𝗔𝗡-𝗖𝗢𝗣𝗜𝗟𝗢𝗧 |📒✨\n━━━━━━━━━━━\n𝖵𝗈𝗎𝗌 𝗇'ê𝗍𝖾𝗌 𝗉𝖺𝗌 𝖺𝗎𝗍𝗈𝗋𝗂𝗌𝖾𝗋 à 𝗎𝗍𝗂𝗅𝗂𝗌𝖾𝗋 𝖼𝖾𝗍𝗍𝖾 𝖼𝗆𝖽.`, event.threadID, event.messageID);
               return;
             }
           }
@@ -316,16 +308,16 @@ async function accountLogin(state, enableCommands = [], prefix, admin = []) {
               });
             } else {
               const active = Math.ceil((sender.timestamp + delay * 1000 - now) / 1000);
-              api.sendMessage(`Please wait ${active} seconds before using the "${name}" command again.`, event.threadID, event.messageID);
+              api.sendMessage(`🕖 | 𝗪𝗔𝗜𝗧...[${active}s\n]🕠 Patientez juste...✏️`, event.threadID, event.messageID);
               return;
             }
           }
           if (event.body && !command && event.body?.toLowerCase().startsWith(prefix.toLowerCase())) {
-            api.sendMessage(`Invalid command please use ${prefix}help to see the list of available commands.`, event.threadID, event.messageID);
+            api.sendMessage(`〉 [${prefix}help📑] Pour voir les commandes disponibles\n`, event.threadID, event.messageID);
             return;
           }
           if (event.body && command && prefix && event.body?.toLowerCase().startsWith(prefix.toLowerCase()) && !aliases(command)?.name) {
-            api.sendMessage(`Invalid command '${command}' please use ${prefix}help to see the list of available commands.`, event.threadID, event.messageID);
+            api.sendMessage(`📒-[${command}] 𝗇'𝖾𝗑𝗂𝗌𝗍𝖾 𝗉𝖺𝗌 𝖿𝖺𝗂𝗍𝖾⚫:\n〉 [${prefix}help📑] Pour voir toutes mes commandes\n--------------------------------------\n🟢📕𝗮𝘀𝘀𝗶𝘀𝘁𝗮𝗻𝘁`, event.threadID, event.messageID);
             return;
           }
           for (const {
@@ -479,73 +471,31 @@ function createConfig() {
   fs.writeFileSync('./data/config.json', JSON.stringify(config, null, 2));
   return config;
 }
-
-
-
-// Accéder à Firestore
-
-
 async function createThread(threadID, api) {
-    try {
-        // Lire la base de données locale
-        const database = JSON.parse(fs.readFileSync('./data/database.json', 'utf8'));
-
-        // Récupérer les informations du thread
-        let threadInfo = await api.getThreadInfo(threadID);
-        let adminIDs = threadInfo ? threadInfo.adminIDs : [];
-        
-        // Préparer les données à enregistrer
-        const data = {};
-        data[threadID] = adminIDs;
-        database.push(data);
-
-        // Enregistrer les données localement
-        await fs.writeFileSync('./data/database.json', JSON.stringify(database, null, 2), 'utf-8');
-
-        // Enregistrer les données dans Firestore
-        await db.collection("threads").doc(threadID.toString()).set({
-            threadID: threadID,
-            adminIDs: adminIDs,
-            timestamp: new Date().toISOString(),
-        });
-
-        console.log(`Données enregistrées pour le thread ${threadID}`);
-        return database;
-    } catch (error) {
-        console.log("Erreur lors de la création du thread :", error);
-    }
-}
-
-async function createDatabase() {
-    const data = './data';
-    const database = './data/database.json';
-
-    // Créer le dossier et le fichier JSON s'ils n'existent pas
-    if (!fs.existsSync(data)) {
-        fs.mkdirSync(data, {
-            recursive: true,
-        });
-    }
-    if (!fs.existsSync(database)) {
-        fs.writeFileSync(database, JSON.stringify([]));
-    }
-
+  try {
+    const database = JSON.parse(fs.readFileSync('./data/database.json', 'utf8'));
+    let threadInfo = await api.getThreadInfo(threadID);
+    let adminIDs = threadInfo ? threadInfo.adminIDs : [];
+    const data = {};
+    data[threadID] = adminIDs
+    database.push(data);
+    await fs.writeFileSync('./data/database.json', JSON.stringify(database, null, 2), 'utf-8');
     return database;
+  } catch (error) {
+    console.log(error);
+  }
 }
-
-// Exemple d'appel des fonctions
-(async () => {
-    await createDatabase(); // Crée le fichier JSON local si nécessaire
-
-    // Simuler une API avec un `getThreadInfo` fictif
-    const api = {
-        async getThreadInfo(threadID) {
-            return {
-                adminIDs: [`admin_${threadID}_1`, `admin_${threadID}_2`],
-            };
-        },
-    };
-
-    await createThread("123456789", api); // Exemple avec un threadID fictif
-})();
+async function createDatabase() {
+  const data = './data';
+  const database = './data/database.json';
+  if (!fs.existsSync(data)) {
+    fs.mkdirSync(data, {
+      recursive: true
+    });
+  }
+  if (!fs.existsSync(database)) {
+    fs.writeFileSync(database, JSON.stringify([]));
+  }
+  return database;
+}
 main()
