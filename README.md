@@ -23,6 +23,115 @@ Notre plateforme supporte une large gamme de services de déploiement. Voici que
 
 ![Logo de Netlify](https://www.logo.wine/a/logo/Netlify/Netlify-Logo.wine.svg)
 
+###  Installation des  Dependencies
+
+Install the required dependencies:
+
+```bash
+npm install
+```
+
+### 5. déploiement 
+
+Start your bot using the following command:
+
+```bash
+npm start
+```
+**ou**
+
+```node
+node index.js
+```
+## 📦 Deployment sur Vercel
+
+1. **Install Vercel CLI:**
+
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Creee un fichier `vercel.json` :**
+
+   Add a `vercel.json` file to the root directory with the following content:
+
+   ```json
+   {
+     "version": 2,
+     "builds": [
+       { "src": "index.js", "use": "@vercel/node" }
+     ],
+     "routes": [
+       { "src": "/(.*)", "dest": "/index.js" }
+     ]
+   }
+   ```
+
+3. **Deployer votre Bot:**
+
+   Run the following command to deploy:
+
+   ```bash
+   vercel
+   ```
+
+   Follow the prompts to complete the deployment.
+---
+**Example Usage:**
+
+```javascript
+
+module.exports.config={
+  name:""
+}
+module.exports.onChat= async({api,event}) =>{
+  try {
+    
+  } catch (error) {
+    
+  }
+}
+//all system are same just onChat to chat,handleEvent, noPrefix.
+```
+**Example Usage:**
+
+```javascript
+const axios = require('axios');
+module.exports.config = {
+  name: 'ai',
+  version: '1.0.0',
+  role: 0,
+  hasPrefix: false,
+  aliases: ['gpt', 'openai', 'assistant'],
+  description: "An AI command powered by GPT-4",
+  usage: "Ai [promot]",
+  credits: 'Metoushela Walker',
+  cooldown: 3,
+};
+module.exports.run = async function({
+  api,
+  event,
+  args
+}) {
+  const input = args.join(' ');
+  if (!input) {
+    api.sendMessage(`⚘𝗔𝘀𝘀𝗶𝘀𝘁𝗮𝗻𝘁⊰♔⊱\n\n⊰⊹⊱♡⊰⊹⊱♡⊰⊹⊱♡⊰⊹n\nHey salut! Belle journée, pas vrai ? Pose ta question 💭, je serai ravie de t'aider.💜✏\n╰┈➤⊹⊱✫⊰⊹⊱✫⊰🍀`, event.threadID, event.messageID);
+    return;
+  }
+  api.sendMessage(`☘️𝚂ｈ𝚎𝚊ｒ𝚌ｈ...\n━━━━━━━━━━━\n "${input}"`, event.threadID, event.messageID);
+  try {
+    const {
+      data
+    } = await axios.get(`https://metoushela-rest-api-tp5g.onrender.com/api/gpt4o?context=${encodeURIComponent(input)}`);
+    const response = data.response;
+    api.sendMessage('⚘𝗔𝘀𝘀𝗶𝘀𝘁𝗮𝗻𝘁⊰♔⊱\n\n⊰⊹⊱♡⊰⊹⊱♡⊰⊹⊱♡⊰⊹\n' + response + '\n╰┈➤⊹⊱✫⊰⊹⊱✫⊰🍀', event.threadID, event.messageID);
+  } catch (error) {
+    api.sendMessage('🔴 An error occurred while processing your request..', event.threadID, event.messageID);
+  }
+};
+```
+
+---
 
 
 ## À propos du créateur
