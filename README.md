@@ -19,30 +19,15 @@ Bienvenue sur le site de création de ChatBots ! Cette plateforme a été conçu
 
 Notre plateforme supporte une large gamme de services de déploiement. Voici quelques exemples :
 
-### Déploiement sur Vercel
-
-![Logo de Vercel](https://vectorseek.com/wp-content/uploads/2021/12/Vercel-Logo-Vector.jpg)
-
-### Déploiement sur Heroku
-
-![Logo de Heroku](https://logowik.com/content/uploads/images/heroku5276.jpg)
-
 ### Déploiement sur Netlify
 
 ![Logo de Netlify](https://www.logo.wine/a/logo/Netlify/Netlify-Logo.wine.svg)
 
-### Déploiement sur Koyeb
 
-![Logo de Koyeb](https://pentagramventures.com/wp-content/uploads/2020/01/koyeb.png)
-
-### Déploiement sur Render
-
-![Logo de Render](https://render.com/images/logos/render-logo-color.svg)
-
----
 
 ## À propos du créateur
 
+<img src="assets/metoushela.jpg" width="100%">
 Ce projet a été créé par **Metoushela Walker**, un développeur passionné par l'intelligence artificielle et la technologie.
 
 ### Quelques informations sur Metoushela Walker :
