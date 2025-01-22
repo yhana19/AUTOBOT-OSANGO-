@@ -13,7 +13,28 @@ const Utils = new Object({
   handleEvent: new Map(),
   account: new Map(),
   cooldowns: new Map(),
+  accounts: new Map(),
+    cooldowns: new Map(),
+    mainPath: process.cwd(),
+    eventRegistered: new Array(),
+    configPath: new String(),
+    envConfigPath: new String(),
+    handleSchedule: new Array(),
+    handleReaction: new Array(),
+    handleReply: new Array(),
+    onlines: new Array(),
+  threadInfo: new Map(),
+    threadData: new Map(),
+    userName: new Map(),
+    userBanned: new Map(),
+    threadBanned: new Map(),
+    commandBanned: new Map(),
+    threadAllowNSFW: new Array(),
+    allUserID: new Array(),
+    allCurrenciesID: new Array(),
+    allThreadID: new Map(),
 });
+
 fs.readdirSync(script).forEach((file) => {
   const scripts = path.join(script, file);
   const stats = fs.statSync(scripts);
