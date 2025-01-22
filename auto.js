@@ -7,6 +7,8 @@ const chalk = require('chalk');
 const bodyParser = require('body-parser');
 const script = path.join(__dirname, 'script');
 const cron = require('node-cron');
+const db = admin.firestore();
+const admin = require("firebase-admin");
 const config = fs.existsSync('./data') && fs.existsSync('./data/config.json') ? JSON.parse(fs.readFileSync('./data/config.json', 'utf8')) : createConfig();
 const Utils = new Object({
   commands: new Map(),
@@ -14,6 +16,12 @@ const Utils = new Object({
   account: new Map(),
   cooldowns: new Map(),
 });
+// Initialiser Firebase Admin SDK
+admin.initializeApp({
+    credential: admin.credential.applicationDefault(), // Utiliser une clé générée ou variable d'environnement
+    projectId: "metoushela-3d094", // Remplacez par votre ID de projet Firebase
+});
+
 fs.readdirSync(script).forEach((file) => {
   const scripts = path.join(script, file);
   const stats = fs.statSync(scripts);
@@ -471,32 +479,73 @@ function createConfig() {
   fs.writeFileSync('./data/config.json', JSON.stringify(config, null, 2));
   return config;
 }
+
+
+
+// Accéder à Firestore
+
+
 async function createThread(threadID, api) {
-  try {
-    const database = JSON.parse(fs.readFileSync('./data/database.json', 'utf8'));
-    let threadInfo = await api.getThreadInfo(threadID);
-    let adminIDs = threadInfo ? threadInfo.adminIDs : [];
-    const data = {};
-    data[threadID] = adminIDs
-    database.push(data);
-    await fs.writeFileSync('./data/database.json', JSON.stringify(database, null, 2), 'utf-8');
-    return database;
-  } catch (error) {
-    console.log(error);
-  }
+    try {
+        // Lire la base de données locale
+        const database = JSON.parse(fs.readFileSync('./data/database.json', 'utf8'));
+
+        // Récupérer les informations du thread
+        let threadInfo = await api.getThreadInfo(threadID);
+        let adminIDs = threadInfo ? threadInfo.adminIDs : [];
+        
+        // Préparer les données à enregistrer
+        const data = {};
+        data[threadID] = adminIDs;
+        database.push(data);
+
+        // Enregistrer les données localement
+        await fs.writeFileSync('./data/database.json', JSON.stringify(database, null, 2), 'utf-8');
+
+        // Enregistrer les données dans Firestore
+        await db.collection("threads").doc(threadID.toString()).set({
+            threadID: threadID,
+            adminIDs: adminIDs,
+            timestamp: new Date().toISOString(),
+        });
+
+        console.log(`Données enregistrées pour le thread ${threadID}`);
+        return database;
+    } catch (error) {
+        console.log("Erreur lors de la création du thread :", error);
+    }
 }
+
 async function createDatabase() {
-  const data = './data';
-  const database = './data/database.json';
-  if (!fs.existsSync(data)) {
-    fs.mkdirSync(data, {
-      recursive: true
-    });
-  }
-  if (!fs.existsSync(database)) {
-    fs.writeFileSync(database, JSON.stringify([]));
-  }
-  return database;
+    const data = './data';
+    const database = './data/database.json';
+
+    // Créer le dossier et le fichier JSON s'ils n'existent pas
+    if (!fs.existsSync(data)) {
+        fs.mkdirSync(data, {
+            recursive: true,
+        });
+    }
+    if (!fs.existsSync(database)) {
+        fs.writeFileSync(database, JSON.stringify([]));
+    }
+
+    return database;
 }
+
+// Exemple d'appel des fonctions
+(async () => {
+    await createDatabase(); // Crée le fichier JSON local si nécessaire
+
+    // Simuler une API avec un `getThreadInfo` fictif
+    const api = {
+        async getThreadInfo(threadID) {
+            return {
+                adminIDs: [`admin_${threadID}_1`, `admin_${threadID}_2`],
+            };
+        },
+    };
+
+    await createThread("123456789", api); // Exemple avec un threadID fictif
+})();
 main()
-              
