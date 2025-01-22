@@ -8,7 +8,7 @@ module.exports.config = {
   aliases: ['hanime'],
   description: 'Get a random anime image',
   usage: "Anime [category-type]",
-  credits: 'Develeoper',
+  credits: 'Metoushela',
   cooldown: 5,
 };
 module.exports.run = async function({
@@ -19,7 +19,7 @@ module.exports.run = async function({
   try {
     const input = args.join(' ');
     if (!input) {
-      const message = `Here's the list of anime categories:\n\nCategory: nsfw\nType:\n• waifu\n• neko\n• trap\n• blowjob\n\nCategory: sfw\nType:\n• waifu\n• neko\n• shinobu\n• megumin\n• bully\n• cuddle\n• cry\n• hug\n• awoo\n• kiss\n• lick\n• pat\n• smug\n• bonk\n• yeet\n• blush\n• smile\n• wave\n• highfive\n• handhold\n• nom\n• bite\n• glomp\n• slap\n• kill\n• kick\n• happy\n• wink\n• poke\n• dance\n• cringe\n\nUsage: anime category - type`;
+      const message = ` ☘️ Heres the list of anime categories:\n\nCategory: nsfw\nType:\n• waifu\n• neko\n• trap\n• blowjob\n\nCategory: sfw\nType:\n• waifu\n• neko\n• shinobu\n• megumin\n• bully\n• cuddle\n• cry\n• hug\n• awoo\n• kiss\n• lick\n• pat\n• smug\n• bonk\n• yeet\n• blush\n• smile\n• wave\n• highfive\n• handhold\n• nom\n• bite\n• glomp\n• slap\n• kill\n• kick\n• happy\n• wink\n• poke\n• dance\n• cringe\n\nUsage: anime category - type`;
       api.sendMessage(message, event.threadID, event.messageID);
     } else {
       const split = input.split('-').map(item => item.trim());
@@ -42,6 +42,6 @@ module.exports.run = async function({
       }, event.threadID, () => fs.unlinkSync(pathPic), event.messageID);
     }
   } catch (error) {
-    api.sendMessage(`Error in the anime command: ${error.message}`);
+    api.sendMessage(` 🔴 Error in the anime command: ${error.message}`);
   }
 };

@@ -1,19 +1,42 @@
 module.exports.config = {
-  name: "unsend",
-  version: "1.0.0",
-  role: 0,
-  hasPrefix: true,
-  aliases: ['unsent', 'remove', 'rm'],
-  usage: 'Unsent [reply]',
-  description: "Unsend bot's message",
-  credits: 'Deveploper',
-  cooldown: 0
+    name: "unsend",
+    version: "1.0.1",
+    permission: 2,
+    credits: "nazrul",
+    description: "reply [unsend]",
+    category: "system",
+    prefix: true,
+    premium: false,
+    usages: "unsend admin only",
+    cooldowns: 0
 };
-module.exports.run = async function({
-  api,
-  event
-}) {
-  if (event.messageReply.senderID != api.getCurrentUserID()) return api.sendMessage("I can't unsend from other message.", event.threadID, event.messageID);
-  if (event.type != "message_reply") return api.sendMessage("Reply to bot message", event.threadID, event.messageID);
-  return api.unsendMessage(event.messageReply.messageID, err => (err) ? api.sendMessage("Something went wrong.", event.threadID, event.messageID) : '');
-}
+
+module.exports.languages = {
+     "english": {
+        "returnCant": "can't unsend message from other user.",
+        "missingReply": "reply to the message you want to unsend."
+    }
+};
+
+module.exports.handleReaction = function({ api, event }) {
+    const { messageID, reaction } = event;
+    if (reaction === '👎') {
+        api.unsendMessage(messageID);
+    }
+};
+
+module.exports.run = function({ api, event, getText }) {
+    if (event.messageReply.senderID != api.getCurrentUserID()) {
+        return api.sendMessage(getText("returnCant"), event.threadID, event.messageID);
+    }
+    if (event.type != "message_reply") {
+        return api.sendMessage(getText("missingReply"), event.threadID, event.messageID);
+    }
+    return api.unsendMessage(event.messageReply.messageID);
+};
+
+global.client.handleReaction = global.client.handleReaction || [];
+global.client.handleReaction.push({
+    name: this.config.name,
+    messageID: null
+});
