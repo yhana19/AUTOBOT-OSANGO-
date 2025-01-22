@@ -1,63 +1,35 @@
-const axios = require('axios');
-
+const {
+  Hercai
+} = require('hercai');
+const herc = new Hercai();
 module.exports.config = {
   name: 'ai',
   version: '1.0.0',
-  hasPermission: 0,
-  usePrefix: false,
-  aliases: ['gpt', 'openai'],
-  description: "An AI command powered by GPT-4",
-  usages: "ai [prompt]",
+  role: 0,
+  hasPrefix: false,
+  description: "An AI command powered by Hercai",
+  usage: "hercai [prompt]",
   credits: 'Developer',
-  cooldowns: 3,
-  dependencies: {
-    "axios": ""
-  }
+  cooldown: 3,
 };
-
-module.exports.run = async function({ api, event, args }) {
+module.exports.run = async function({
+  api,
+  event,
+  args
+}) {
   const input = args.join(' ');
-
   if (!input) {
-    return api.sendMessage(`Please provide a question or statement after 'ai'. For example: 'ai What is the capital of France?'`, event.threadID, event.messageID);
+    api.sendMessage(`AI | 📑✨\n━━━━━━━━━━━\n\n𝙿𝚘𝚜𝚎𝚛 𝚟𝚘𝚝𝚛𝚎 𝚚𝚞𝚎𝚜𝚝𝚒𝚘𝚗..💭`, event.threadID, event.messageID);
+    return;
   }
-
-  if (input === "clear") {
-    try {
-      await axios.post('https://gaypt4ai.onrender.com/clear', { id: event.senderID });
-      return api.sendMessage("Chat history has been cleared.", event.threadID, event.messageID);
-    } catch (error) {
-      console.error(error);
-      return api.sendMessage('An error occurred while clearing the chat history.', event.threadID, event.messageID);
-    }
-  }
-
-
-  let chatInfoMessageID = "";
-  
-  api.sendMessage(`🔍 "${input}"`, event.threadID, (error, chatInfo) => {
-    chatInfoMessageID = chatInfo.messageID;
-  },event.messageID);
-
+  api.sendMessage(`📝 Please wait......\n━━━━━━━━━━━\n "${input}"`, event.threadID, event.messageID);
   try {
-    const url = (event.type === "message_reply" && event.messageReply.attachments[0]?.type === "photo")
-      ? { link: event.messageReply.attachments[0].url }
-      : {};
-
-    const { data } = await axios.post('https://gays-porno-api.onrender.com/chat', {
-      prompt: input,
-      customId: event.senderID,
-      ...url
+    const response = await herc.question({
+      model: "v3",
+      content: input
     });
-
-    api.editMessage(`${data.message}`, chatInfoMessageID, (err) => {
-      if (err) {
-        console.error(err);
-      }
-    });
-
+    api.sendMessage('AI | 📑✨:\n━━━━━━━━━━━\n\n' + response.reply, event.threadID, event.messageID);
   } catch (error) {
-    console.error(error);
-    return api.sendMessage('An error occurred while processing your request.', event.threadID, event.messageID);
+    api.sendMessage('🔴 𝙰𝚗 𝚎𝚛𝚛𝚘𝚛 𝚘𝚌𝚌𝚞𝚛𝚛𝚎𝚍 𝚠𝚑𝚒𝚕𝚎 𝚙𝚛𝚘𝚌𝚎𝚜𝚜𝚒𝚗𝚐 𝚢𝚘𝚞𝚛 𝚛𝚎𝚚𝚞𝚎𝚜𝚝.', event.threadID, event.messageID);
   }
 };
