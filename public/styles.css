@@ -74,10 +74,10 @@ body {
 	   background: #000000;
 		 border-radius: 10px;
 		 padding: 20px;
-	   box-shadow: 0 0 .2rem #fff,0 0 .2rem #fff, 0 0 2rem #00FF00,
-            0 0 0.8rem #00FF00,
-            0 0 2.8rem #00FF00,
-            inset 0 0 1.3rem #00FF00;
+	   box-shadow: 0 0 .2rem #fff,0 0 .2rem #fff, 0 0 2rem #1F51FF,
+            0 0 0.8rem #1F51FF,
+            0 0 2.8rem #1F51FF,
+            inset 0 0 1.3rem #1F51FF;
 		 margin-top: 20px;
 		 margin-bottom: 20px;
 	 outline: 2px solid #FFFFFF;
@@ -209,10 +209,23 @@ div {
 
 body {
     font-family: Arial, sans-serif;
-    background-image: url('https://i.imgur.com/7buefl8.jpeg'); 
+    background-image: url('https://i.postimg.cc/ZnGkJSMh/0aaee5b9fccabe60b3b5fef887d12f37.jpg'); 
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; 
     background-attachment: fixed;
     color: #333;
     padding: 20px;
   }
+#button12{
+	background-color: transparent;
+	color: #fff;
+	border:1px solid #D6D6D6;
+	border-radius: 5px;
+	padding : 20px;
+	margin: 20px;
+	transition: 0.5s ease-out;
+}
+#button12:hover{
+	background-color: #000;
+	color: #fff
+	 }
