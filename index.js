@@ -1,7 +1,10 @@
+// Importation des modules nécessaires
 const { spawn } = require("child_process");
 const path = require("path");
 const admin = require("firebase-admin");
+const { Storage } = require("@google-cloud/storage");
 
+// Configuration Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyDEdrwfF9m_af0zOVUF7TbRWFomnrmbZUs",
     authDomain: "metoushela-3d094.firebaseapp.com",
@@ -12,36 +15,36 @@ const firebaseConfig = {
     measurementId: "G-FBWGC7Y652",
 };
 
-// Initialiser Firebase Admin SDK
+// Initialisation du SDK Firebase Admin
 admin.initializeApp({
-    credential: admin.credential.applicationDefault(), 
+    credential: admin.credential.applicationDefault(),
     projectId: firebaseConfig.projectId,
 });
-const {Storage} = require('@google-cloud/storage');
 
+// Fonction pour authentifier et lister les buckets de stockage
 async function authenticateImplicitWithAdc() {
-  // This snippet demonstrates how to list buckets.
-  // NOTE: Replace the client created below with the client required for your application.
-  // Note that the credentials are not specified when constructing the client.
-  // The client library finds your credentials using ADC.
-  const storage = new Storage({
-    projectId,
-  });
-  const [buckets] = await storage.getBuckets();
-  console.log('Buckets:');
+    try {
+        const storage = new Storage({ projectId: firebaseConfig.projectId });
+        const [buckets] = await storage.getBuckets();
 
-  for (const bucket of buckets) {
-    console.log(`- ${bucket.name}`);
-  }
+        console.log("Buckets:");
+        buckets.forEach((bucket) => {
+            console.log(`- ${bucket.name}`);
+        });
 
-  console.log('Listed all storage buckets.');
+        console.log("Listed all storage buckets.");
+    } catch (error) {
+        console.error("Erreur lors de l'authentification ou de la liste des buckets :", error);
+    }
 }
 
+// Appeler la fonction d'authentification
 authenticateImplicitWithAdc();
-// Accéder à Firestore ou à une autre base de données Firebase
+
+// Accès à Firestore
 const db = admin.firestore();
 
-// Exemple : Lire les données d'une collection Firestore
+// Fonction pour lire les données d'une collection Firestore
 async function readData() {
     try {
         const snapshot = await db.collection("exampleCollection").get();
@@ -53,10 +56,10 @@ async function readData() {
     }
 }
 
-
+// Lire les données
 readData();
 
-// Gestion du script enfant
+// Gestion du processus enfant
 const SCRIPT_FILE = "auto.js";
 const SCRIPT_PATH = path.join(__dirname, SCRIPT_FILE);
 
@@ -81,3 +84,4 @@ function start() {
 
 // Lancer le script enfant
 start();
+        
