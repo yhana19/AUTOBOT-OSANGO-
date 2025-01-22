@@ -11,7 +11,7 @@ Bienvenue sur le site de création de ChatBots ! Cette plateforme a été conçu
 
 ## Aperçu
 
-<img src="assets/img.jpg" width="100%">
+<img src="assets/apercue.jpg" width="100%">
 
 ---
 
@@ -136,7 +136,7 @@ module.exports.run = async function({
 
 ## À propos du créateur
 
-<img src="assets/metou.jpg" width="100%">
+<img src="assets/admin.jpg" width="100%">
 Ce projet a été créé par **Metoushela Walker**, un développeur passionné par l'intelligence artificielle et la technologie.
 
 ### Quelques informations sur Metoushela Walker :
