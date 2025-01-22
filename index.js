@@ -1,15 +1,50 @@
 const { spawn } = require("child_process");
-const path = require('path');
+const path = require("path");
+const admin = require("firebase-admin");
 
+const firebaseConfig = {
+    apiKey: "AIzaSyDEdrwfF9m_af0zOVUF7TbRWFomnrmbZUs",
+    authDomain: "metoushela-3d094.firebaseapp.com",
+    projectId: "metoushela-3d094",
+    storageBucket: "metoushela-3d094.appspot.com",
+    messagingSenderId: "530111318315",
+    appId: "1:530111318315:web:4ea87a6c7f3aa05cef9d6e",
+    measurementId: "G-FBWGC7Y652",
+};
+
+// Initialiser Firebase Admin SDK
+admin.initializeApp({
+    credential: admin.credential.applicationDefault(), 
+    projectId: firebaseConfig.projectId,
+});
+
+// Accéder à Firestore ou à une autre base de données Firebase
+const db = admin.firestore();
+
+// Exemple : Lire les données d'une collection Firestore
+async function readData() {
+    try {
+        const snapshot = await db.collection("exampleCollection").get();
+        snapshot.forEach((doc) => {
+            console.log(doc.id, "=>", doc.data());
+        });
+    } catch (error) {
+        console.error("Erreur lors de la lecture des données Firestore :", error);
+    }
+}
+
+
+readData();
+
+// Gestion du script enfant
 const SCRIPT_FILE = "auto.js";
 const SCRIPT_PATH = path.join(__dirname, SCRIPT_FILE);
-
 
 function start() {
     const main = spawn("node", [SCRIPT_PATH], {
         cwd: __dirname,
         stdio: "inherit",
-        shell: true
+        shell: true,
     });
 
     main.on("close", (exitCode) => {
@@ -18,11 +53,11 @@ function start() {
         } else if (exitCode === 1) {
             console.log("Main process exited with code 1. Restarting...");
             start();
-        }  else {
+        } else {
             console.error(`Main process exited with code ${exitCode}`);
         }
     });
 }
 
+// Lancer le script enfant
 start();
-
