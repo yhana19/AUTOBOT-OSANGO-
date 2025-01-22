@@ -2,6 +2,7 @@
 # Site de Création de ChatBots
 
 Bienvenue sur le site de création de ChatBots ! Cette plateforme a été conçue pour vous permettre de créer facilement et rapidement vos propres ChatBots, personnalisés selon vos besoins.
+visiter : https://mindest.onrender.com
 
 ## Fonctionnalités
 
