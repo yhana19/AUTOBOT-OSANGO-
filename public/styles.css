@@ -1,231 +1,375 @@
+
+           /* Corps principal */
+/* Corps principal */
 body {
-		margin: auto;
-		padding: 20px;
-		font-family: -apple-system, 'Poppins', BlinkMacSystemFont, sans-serif;
-		overflow: auto;
-		background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
-		animation: gradient 15s ease infinite;
-		background-size: 400% 400%;
-		background-attachment: fixed;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: georgia,sans;
+  background: linear-gradient(355deg,blue,red,purple,orange,green);
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  color: #333;
+  animation: gradient 15s ease infinite;
 }
 
+
+/* Animation de gradient */
 @keyframes gradient {
-		0% {
-				background-position: 0% 0%;
-		}
-		50% {
-				background-position: 100% 100%;
-		}
-		100% {
-				background-position: 0% 0%;
-		}
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
 }
 
+/* Vagues */
 .wave {
-		background: rgb(255 255 255 / 25%);
-		border-radius: 1000% 1000% 0 0;
-		position: fixed;
-		width: 200%;
-		height: 12em;
-		animation: wave 10s -3s linear infinite;
-		transform: translate3d(0, 0, 0);
-		opacity: 0.8;
-		bottom: 0;
-		left: 0;
-		z-index: -1;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 1000% 1000% 0 0;
+  position: fixed;
+  width: 200%;
+  height: 12em;
+  opacity: 0.8;
+  animation: wave 10s linear infinite;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
 }
 
-.wave:nth-of-type(2) {
-		bottom: -1.25em;
-		animation: wave 18s linear reverse infinite;
-		opacity: 0.8;
-}
+.wave:nth-of-type(2) { bottom: -1.25em; animation-duration: 18s; }
+.wave:nth-of-type(3) { bottom: -2.5em; animation-duration: 20s; }
 
-.wave:nth-of-type(3) {
-		bottom: -2.5em;
-		animation: wave 20s -1s reverse infinite;
-		opacity: 0.9;
-}
-
+/* Animation de vagues */
 @keyframes wave {
-		2% {
-				transform: translateX(1);
-		}
-
-		25% {
-				transform: translateX(-25%);
-		}
-
-		50% {
-				transform: translateX(-50%);
-		}
-
-		75% {
-				transform: translateX(-25%);
-		}
-
-		100% {
-				transform: translateX(1);
-		}
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-50%); }
 }
 
+/* Conteneurs */
 .container {
-	   color: #FFFF;
-	   background: #000000;
-		 border-radius: 10px;
-		 padding: 20px;
-	   box-shadow: 0 0 .2rem #fff,0 0 .2rem #fff, 0 0 2rem #1F51FF,
-            0 0 0.8rem #1F51FF,
-            0 0 2.8rem #1F51FF,
-            inset 0 0 1.3rem #1F51FF;
-		 margin-top: 20px;
-		 margin-bottom: 20px;
-	 outline: 2px solid #FFFFFF;
-}
- h1 {
-		 color: #FFFFFF;
-		 font-size: 24px;
-		 margin-bottom: 15px;
-}
- label {
-		 background-color: #FFFFFF;
-	   color: #343434;
-		 border-radius: 10px;
-		 font-weight: bold;
-		 margin-bottom: 5px;
-	   background-image: #FFFFFF;
-}
- .centered-textarea {
-		 color: #FFFFFF;
-		 display: flex;
-		 margin: 0 auto;
-		 width: 100%;
-		 min-height: 150px;
-		 padding: 10px;
-		 box-sizing: border-box;
-		 border: 1px solid #00ffff;
-		 border-radius: 5px;
-		 resize: none;
-}
- .btn-primary {
-		 background-color: #00ff00;
-		 border: 1px solid #007bff;
-	   color: #261a1a;
-}
- .btn-primary:hover {
-		 background-color: #76d674;
-		 border: 1px solid #0056b3;
-}
- .success-message {
-		 color: green;
-		 margin-top: 10px;
-}
- .footer {
-		 background-color: #E90207 46%,  #ff8c00 100%;
-		 padding: 10px;
-		 text-align: center;
-		 font-size: 16px;
-		 color: #FFFFFF;
-		 margin-top: 50px;
-		 border-top: 1px solid #blue;
-		 position: fixed;
-		 bottom: 0;
-		 left: 0;
-		 width: 100%;
-}
- .footer p {
-		 margin: 0;
-		 display: inline-block;
-		 margin-right: 30px;
-}
- .container-buttons {
-		 margin-top: 20px;
-		 text-align: center;
-}
- .container-buttons .btn {
-		 margin: 5px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #4a4a9e, #ff5757);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1.5s ease-in-out;
 }
 
- #result {
-		 padding: 10px;
-		 margin-top: 20px;
-		 border-radius: 5px;
-}
- .center-placeholder::placeholder {
-		 text-align: center;
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
-.form-check {
-	display: flex;
-	margin-top: 10px;
-	padding: 14px;
-	align-items: center;
-	border: 1px solid #red;
-	border-radius: 8px;
-	cursor: pointer;
-	transition: background-color 0.3s ease, border-color 0.3s ease; 
-	border-color: #ccc;
-	background-color: #fff;
+/* Formulaire */
+textarea {
+  width: 500px;
+  min-height: 150px;
+  padding: 10px;
+  border: 1px solid #00ffff;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  resize: none;
+  color: #000;
+    animation: fadeIn 8s ease-in-out;
+
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+
 }
 
-.form-check:hover {
-	background-color: #f5f5; 
-	border-color: #f8f8f8; 
+textarea:placeholder {
+  text-align: center;
+  color: red;
+  width:200000px;
 }
 
-.form-check-input {
-	margin-right: 10px; 
-	opacity: 0;
+button {
+  background-color: #00ff00;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px 20px;
+  transition: background-color 3s ease, transform 0.3s ease;
 }
 
-.disable {
-	display: none;
+button:hover {
+  background-color: #007b00;
+  transform: scale(1.05);
 }
 
-#inputOfPrefix, #inputOfAdmin,
-#inputOfBotName {
-	padding: 13px;
-	width: 200px;
-	border: 1px solid #ccc;
-	border-radius: 8px;
-	cursor: pointer;
-	transition: background-color 0.3s ease, border-color 0.3s ease; 
-	border-color: #ccc;
-	background-color: #fff;
-}
-#listOfCommands, #listOfCommandsEvent, #prefixOfCommands, #adminOfCommands {
-	border: none !important;
+/* Pied de page */
+.footer {
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
 
-#listOfCommands:not(.modal), #listOfCommandsEvent:not(.modal), #prefixOfCommands:not(.modal),
-#adminOfCommands:not(.modal) {
-	box-shadow: none !important;
-}
+.footer p { margin: 0; }  
 
-div {
-	margin-bottom: 10px;
-	border-radius: 5px;
-}
 
-body {
-    font-family: Arial, sans-serif;
-    background-image: url('https://i.postimg.cc/ZnGkJSMh/0aaee5b9fccabe60b3b5fef887d12f37.jpg'); 
-    background-size: cover;
-    background-repeat: no-repeat; 
-    background-attachment: fixed;
-    color: #333;
-    padding: 20px;
+
+      /* Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
   }
-#button12{
-	background-color: transparent;
-	color: #fff;
-	border:1px solid #D6D6D6;
-	border-radius: 5px;
-	padding : 20px;
-	margin: 20px;
-	transition: 0.5s ease-out;
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
-#button12:hover{
-	background-color: #000;
-	color: #fff
-	 }
+
+/* Formulaire */
+form {
+ 
+  width: 260px;
+  margin: 50px auto;
+  background:linear-gradient(350deg,blueviolet,red);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 5552px rgba(0, 0, 0, 0.3);
+  opacity: 0; /* Cache le formulaire au début */
+  animation: fadeIn 1s ease-in-out 4s forwards; /* Animation après 3 secondes */
+  backdrop-filter: blur(10px); /* Effet de flou en arrière-plan */
+       border-bottom-left-radius: 10px;
+    border-top-right-radius:10px;
+    }
+          /* Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  form {
+ 
+  width: 260px;
+  margin: 50px auto;
+  background:linear-gradient(350deg,blueviolet,red);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0; /* Cache le formulaire au début */
+  animation: fadeIn 1s ease-in-out 4s forwards; /* Animation après 3 secondes */
+  backdrop-filter: blur(10px); /* Effet de flou en arrière-plan */
+       border-bottom-left-radius: 10px;
+    border-top-right-radius:10px;
+    }
+          /* Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Formulaire */
+
+}
+form {
+ 
+  width: 260px;
+  margin: 50px auto;
+  background:linear-gradient(350deg,blueviolet,red);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0; /* Cache le formulaire au début */
+  animation: fadeIn 1s ease-in-out 4s forwards; /* Animation après 3 secondes */
+  backdrop-filter: blur(10px); /* Effet de flou en arrière-plan */
+       border-bottom-left-radius: 10px;
+    border-top-right-radius:10px;
+    }
+          /* Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Formulaire */
+
+}
+form {
+ 
+  width: 260px;
+  margin: 50px auto;
+  background:linear-gradient(350deg,blueviolet,red);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0; /* Cache le formulaire au début */
+  animation: fadeIn 1s ease-in-out 4s forwards; /* Animation après 3 secondes */
+  backdrop-filter: blur(10px); /* Effet de flou en arrière-plan */
+       border-bottom-left-radius: 10px;
+    border-top-right-radius:10px;
+    }
+          /* Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Formulaire */
+
+}
+form {
+ 
+  width: 260px;
+  margin: 50px auto;
+  background:linear-gradient(350deg,blueviolet,red);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0; /* Cache le formulaire au début */
+  animation: fadeIn 1s ease-in-out 4s forwards; /* Animation après 3 secondes */
+  backdrop-filter: blur(10px); /* Effet de flou en arrière-plan */
+       border-bottom-left-radius: 10px;
+    border-top-right-radius:10px;
+    }
+          /* Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Formulaire */
+
+}
+
+}
+
+/* Formulaire */
+
+}
+
+/* Style des labels */
+label {
+  margin-bottom: 10px;
+  display: block;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8); /* Texte blanc légèrement transparent */
+  font-size: 0.95rem;
+  text-transform: uppercase;
+       border-bottom-left-radius: 5px;
+    border-top-right-radius:5px;
+}
+
+/* Style des inputs et textareas */
+input,
+textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.5); /* Fond sombre et transparent */
+  color: #ffffff;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border 0.3s ease, background 0.3s ease;
+       border-bottom-left-radius: 10px;
+    border-top-right-radius:10px;
+}
+
+
+
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 1px solid rgba(106, 64, 252, 0.8); /* Bordure violette */
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Boutons */
+button {
+  background: linear-gradient(135deg, #6a40fc, #ff3e3e); /* Dégradé moderne */
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  width:200px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+  text-transform: uppercase;
+}
+
+button:hover {
+  transform: translateY(-3px); /* Effet de soulèvement */
+  background: linear-gradient(135deg, #bc48fc, #6a40fc);
+}
+
+/* Footer */
+footer i:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+footer h1 {
+  color: white;
+  font-family: 'Georgia', serif;
+}
+
+footer p {
+  color: lightgray;
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+/* Clients */
+.client1,
+.client2,
+.client3 {
+  float: left;
+  width: 100%;
+  height: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-left-radius:55px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  margin: 20px 0;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.8); /* Texte blanc avec transparence */
+  text-align: center;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.5); /* Fond sombre et transparent */
+  backdrop-filter: blur(5px); /* Effet de flou */
+}
+
+.client1 {
+  display: block;
+}
+
+	
+     
