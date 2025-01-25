@@ -80,7 +80,7 @@ textarea {
 
 textarea:placeholder {
   text-align: center;
-  color: red;
+  color: block;
   width:200000px;
 }
 
